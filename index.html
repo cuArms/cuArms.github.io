@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="cuArms: GPU-accelerated conflict-based planning for multi-arm manipulation. Baseline comparisons, object scaling, and simulation and real robot demonstrations.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#f8f9f6">
+  <title>cuArms · Multi-Arm Manipulation</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css?v=20261012c">
+  <script src="content.js?v=20261012c" defer></script>
+  <script src="site.js?v=20261012c" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="wordmark" href="#top">cuArms</a>
+      <nav aria-label="Main navigation">
+        <a href="#demos">Videos</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#experiment-1">Experiment 1</a><a href="#experiment-2">Experiment 2</a><a href="#results">Additional results</a><a href="#agents">Coding agents</a><a href="#intent">Human intent</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-width" aria-labelledby="paper-title">
+      <h1 id="paper-title">cuArms: GPU-Accelerated Conflict-Based Planning for Multi-Arm Manipulation</h1>
+      <p class="authors">Anonymous Authors</p>
+    </section>
+    <section class="showcase page-width" id="demos" aria-label="Featured demonstrations">
+      <div class="showcase-layout">
+        <div class="featured-demo">
+          <div id="featured-player"></div>
+          <p id="featured-description" class="featured-caption">Two arms execute a pick, handover, and place sequence to reorient an object.</p>
+        </div>
+        <div class="demo-picker" id="demo-picker" role="group" aria-label="Choose a featured demonstration"></div>
+      </div>
+      <noscript><video controls muted playsinline preload="none" src="videos/web/handover.mp4" poster="assets/posters/handover.jpg" aria-label="Bimanual handover"></video></noscript>
+    </section>
+    <section class="abstract-section section-space" id="abstract" aria-labelledby="abstract-title">
+      <div class="reading-width">
+        <h2 id="abstract-title">Abstract</h2>
+        <p>Multi-arm manipulation has the potential to dramatically improve the throughput, efficiency, and dexterity of many manipulation tasks. Recent work coordinates multiple robot arms in a shared workcell by allocating and scheduling tasks for greater parallelism, jointly planning multi-arm motions, or directly learning multi-arm policies. So far, these approaches are either too slow, rely on domain-specific assumptions, or scale poorly with the number of robots and task horizon. Thus, we introduce cuArms, a conflict-based planner co-designed with GPU parallelism that efficiently decomposes the search space using reusable multi-modal roadmaps for individual robots and resolves conflicts and deadlocks through a lazy search. To jointly optimize task assignment, schedules, motions, and manipulation skills, we integrate a high-level scheduler that proposes candidate skeletons for cuArms to ground into coordinated manipulation plans. Experimental results show that our method establishes a new state of the art, with real-time initial solutions and anytime improvements in both motion quality and scheduling, without days of domain-specific training required by learning approaches.</p>
+      </div>
+    </section>
+
+    <section class="page-width section-space" id="method" aria-labelledby="method-title">
+      <h2 id="method-title">Method</h2>
+      <figure class="method-figure">
+        <a href="assets/figures/method.png" target="_blank" rel="noopener" aria-label="Open the method figure at full resolution"><img src="assets/figures/method.png" width="2600" height="812" loading="lazy" alt="Figure 2: a task scheduler feeds multi-modal roadmap construction, GPU-batched joint coordination, and shortcut refinement. The resulting plan feeds back to alternative schedules."></a>
+        <figcaption><strong>Figure 2. System and cuArms overview.</strong> A human or agent defines the task: the robots and their kinematics, the objects, goals, and constraints. The domain also supplies samplers that can generate feasible manipulation choices. A task scheduler, such as ScheduleStream, proposes a candidate schedule. This includes task assignment and ordering, along with satisfying samples such as placements, grasps, and inverse kinematic solutions. cuArms builds a per-robot multi-modal roadmap, searches for conflict-free robot movements and skills with GPU-batched conflict tables, and refines the solution trajectory with shortcutting. cuArms can iteratively replan with different schedule skeletons to improve upon infeasible or poor skeletons.</figcaption>
+      </figure>
+      <div class="method-contributions">
+        <h3 class="contributions-title">Our contributions are:</h3>
+        <ul class="contributions">
+          <li>cuArms, a multi-arm manipulation planner that combines per-arm roadmaps, lazy conflict-driven joint search, and anytime trajectory refinement in a disaggregated architecture co-designed for GPU-batched computation.</li>
+          <li>Domain-agnostic, multi-arm task and motion planning by integrating cuArms with a high-level scheduler with support for collaborative bimanual manipulation skills, such as handover and carry.</li>
+          <li>Simulation and real-robot experiments for multi-arm manipulation, welding, and assembly tasks demonstrating the algorithm’s efficiency, quality, and scalability</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="page-width section-space experiment-section" id="experiment-1" aria-labelledby="experiment-1-title">
+      <h2 id="experiment-1-title">Experiment 1 - RoboBallet <a class="citation" href="#reference-1">[1]</a></h2>
+      <p class="section-description">Multi-arm welding with 40 targets. cuArms planning time includes scheduling, the initial solution, and refinement. RL rollouts show 20-second excerpts.</p>
+      <div id="roboballet-comparisons"></div>
+      <p class="section-reference" id="reference-1"><span>[1]</span> M. Lai, K. Go, Z. Li, T. Kröger, S. Schaal, K. Allen, and J. Scholz, “<a href="https://deepmind.google/research/publications/111579/" target="_blank" rel="noopener">RoboBallet: Planning for Multi-Robot Reaching with Graph Neural Networks and Reinforcement Learning</a>,” <em>Science Robotics</em>, 2025.</p>
+    </section>
+
+    <section class="page-width section-space experiment-section" id="experiment-2" aria-labelledby="experiment-2-title">
+      <h2 id="experiment-2-title">Experiment 2 - Tabletop Manipulation</h2>
+      <p class="section-description">cuArms and ScheduleStream <a class="citation" href="#reference-2">[2]</a> optimize the same schedule skeleton. Planning time includes scheduling and the initial solution, plus refinement for cuArms.</p>
+      <div id="tabletop-comparisons"></div>
+      <div class="scaling-results" id="scaling">
+        <h3>Scaling to more objects</h3>
+        <p class="section-description">Packing and unpacking with 6 and 8 objects. Total planning time = scheduling + initial solution + refinement, as shown in the supplementary video.</p>
+        <div id="scaling-player"></div>
+      </div>
+      <p class="section-reference" id="reference-2"><span>[2]</span> C. Garrett and F. Ramos, “<a href="https://schedulestream.github.io/" target="_blank" rel="noopener">ScheduleStream: Temporal Planning with Samplers for GPU-Accelerated Multi-Arm Task and Motion Planning &amp; Scheduling</a>,” <em>ICRA</em>, 2026.</p>
+    </section>
+
+    <section class="page-width section-space experiment-section" id="results" aria-labelledby="results-title">
+      <h2 id="results-title">Additional Results</h2>
+      <p class="section-description">Multi-Modal Multi-Robot Multi-Goal Path Planning benchmark <a class="citation" href="#reference-3">[3]</a>. Planning time includes refinement. Makespan timers show execution time; speed labels indicate accelerated playback.</p>
+      <div id="assembly-player"></div>
+      <p class="section-reference" id="reference-3"><span>[3]</span> V. N. Hartmann, T. Heinle, Y. Huang, and S. Coros, “<a href="https://arxiv.org/abs/2503.03509" target="_blank" rel="noopener">Sampling-Based Multi-Modal Multi-Robot Multi-Goal Path Planning</a>,” <em>WAFR</em>, 2026.</p>
+    </section>
+    <section class="page-width section-space experiment-section" id="agents" aria-labelledby="agents-title">
+      <h2 id="agents-title">Using Coding Agents as the Scheduler</h2>
+      <p class="section-description">In the experiments above, cuArms and each baseline plan the same schedule skeleton. Here we compare two schedulers on top of cuArms: hand-engineered schedulers (greedy Hungarian matching for welding, ScheduleStream for tabletop manipulation) and an off-the-shelf coding agent (Claude Opus or GPT Astra). The agent chooses the task assignment, the skill parameters such as grasps and placements, and the schedule; it calls cuArms through its API and iterates on the results. Each problem is solved from scratch in a fresh sandbox within a 20-minute session, and the final plan is validated independently.</p>
+      <figure class="agent-diagram">
+        <svg viewBox="0 0 1000 250" role="img" aria-labelledby="agent-diagram-title agent-diagram-desc">
+          <title id="agent-diagram-title">A coding agent as the scheduler</title>
+          <desc id="agent-diagram-desc">The task goes to a coding agent, which writes skills, schedule skeletons and costs and calls the cuArms API; cuArms returns coordinated plans and feedback; the agent iterates and outputs a plan that is verified independently.</desc>
+          <defs>
+            <marker id="agent-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="agent-arrowhead"/></marker>
+          </defs>
+          <g class="agent-node">
+            <rect x="10" y="80" width="170" height="90" rx="10"/>
+            <text x="95" y="114" class="agent-node-title">Task</text>
+            <text x="95" y="138">robots, objects,</text>
+            <text x="95" y="156">goal (in words)</text>
+          </g>
+          <g class="agent-node agent-node-strong">
+            <rect x="250" y="60" width="230" height="130" rx="10"/>
+            <text x="365" y="96" class="agent-node-title">Coding agent</text>
+            <text x="365" y="122">writes skills and samplers,</text>
+            <text x="365" y="141">schedule skeletons, costs</text>
+            <text x="365" y="168" class="agent-node-note">Claude Opus · GPT Astra</text>
+          </g>
+          <g class="agent-node agent-node-strong">
+            <rect x="590" y="60" width="210" height="130" rx="10"/>
+            <text x="695" y="96" class="agent-node-title">cuArms API</text>
+            <text x="695" y="122">roadmaps, conflict search,</text>
+            <text x="695" y="141">refinement on the GPU</text>
+            <text x="695" y="168" class="agent-node-note">coordinated multi-arm plans</text>
+          </g>
+          <g class="agent-node">
+            <rect x="860" y="80" width="130" height="90" rx="10"/>
+            <text x="925" y="114" class="agent-node-title">Plan</text>
+            <text x="925" y="138">verified</text>
+            <text x="925" y="156">independently</text>
+          </g>
+          <path d="M180 125H244" class="agent-edge" marker-end="url(#agent-arrow)"/>
+          <path d="M800 125H854" class="agent-edge" marker-end="url(#agent-arrow)"/>
+          <path d="M440 60C470 24 610 24 640 60" class="agent-edge" marker-end="url(#agent-arrow)"/>
+          <path d="M640 190C610 226 470 226 440 190" class="agent-edge" marker-end="url(#agent-arrow)"/>
+          <text x="540" y="18" class="agent-edge-label">skeletons, skills, costs</text>
+          <text x="540" y="240" class="agent-edge-label">plans, makespans, failures, renders</text>
+          <text x="540" y="131" class="agent-loop-label">iterate</text>
+        </svg>
+      </figure>
+      <div class="agent-results" id="agent-results"></div>
+    </section>
+
+    <section class="page-width section-space experiment-section" id="intent" aria-labelledby="intent-title">
+      <h2 id="intent-title">Can Coding Agents Align the Planner Behavior with Human Intent?</h2>
+      <p class="section-description">Below, we ask the agent to generate a multi-arm manipulation plan according to a natural-language preference provided by a person. Can Astra+cuArms produce manipulation plans that follow human preferences for speed versus smoothness?</p>
+      <div class="intent-prompts">
+        <div class="intent-prompt">
+          <h3>Speed only</h3>
+          <p><strong>Scoring:</strong> validated success first, then makespan (the time until every robot is done).</p>
+          <p class="same">The rest of the task description is the same in both: the cell, the goals, and where to grasp each part.</p>
+        </div>
+        <div class="intent-prompt">
+          <h3>Speed and smoothness</h3>
+          <p><strong>Produce motions a person would be comfortable standing next to:</strong></p>
+          <ul>
+            <li>smooth and Cartesian-like (the gripper moves in straight, purposeful lines);</li>
+            <li>no large or alarming swings;</li>
+            <li>no needless joint-space detours;</li>
+            <li>never sweep an arm behind its base.</li>
+          </ul>
+          <p><strong>Balance speed and smoothness.</strong> Move as fast as the arms can while the motion stays smooth and purposeful. Slow motion is not better motion: a skilled engineer's program does each pick, handover, or placement in a few seconds.</p>
+        </div>
+      </div>
+      <div id="intent-results"></div>
+    </section>
+
+  </main>
+  <footer class="page-width"><a class="wordmark" href="#top">cuArms</a><p>Anonymous research project · Under double-blind review</p><a href="#top">Back to top ↑</a></footer>
+</body>
+</html>

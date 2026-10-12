@@ -1,0 +1,12 @@
+.DS_Store
+/videos/*.mp4
+/videos/*.mov
+/videos/*.webm
+/output/
+/dist/
+/.playwright-cli/
+__pycache__/
+/DESIGN.md
+/TODO.md
+/ANONYMITY-AUDIT.md
+/scripts/prepare_media.py
