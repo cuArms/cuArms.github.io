@@ -4,7 +4,7 @@ window.CUARMS_FEATURED = [
   { id: 'handover', title: 'Bimanual Handover', duration: 20, aspect: '1280 / 790', caption: 'Two arms execute a pick, handover, and place sequence to reorient an object.' },
   { id: 'carry', title: 'Bimanual Carry', duration: 24, aspect: '1280 / 790', caption: 'Two arms grasp and carry a shared object into place.' },
   { id: 'kinova', title: 'Bimanual TableTop Packing', duration: 71.2, speed: 2, caption: 'Two Kinova arms coordinate pick-and-place motions to pack blocks into a shared region.' },
-  { id: 'kinova-stack', title: 'Bimanual Block Stacking', duration: 42.5, speed: 2, aspect: '896 / 672', caption: 'Two Kinova arms coordinate pick-and-place motions to stack blocks into a single tower.' },
+  { id: 'kinova-stack', title: 'Bimanual Block Stacking', duration: 42.5, speed: 2, aspect: '16 / 9', caption: 'Two Kinova arms coordinate pick-and-place motions to stack blocks into a single tower.' },
   { id: 'reaching', title: 'Multi-Arm Welding', duration: 9.6, caption: 'Eight arms coordinate motions to reach 40 weld targets in a shared workcell.' },
   { id: 'pack', title: 'Tabletop Manipulation', duration: 8.925, caption: 'Two arms coordinate motions and manipulation skills to pack objects into a shared region.' },
   { id: 'supplementary', title: 'Full Supplementary Video', duration: 176.233333, caption: 'The complete anonymous supplementary video, including real-robot experiments, baseline comparisons, object scaling, and additional results.' },
