@@ -54,6 +54,17 @@ window.CUARMS_ASSEMBLIES = [
   { id: 'assembly-cube', title: 'Cube', planning: 15.57, duration: 36.533333, speed: 3 },
 ];
 
+// One xECBS query per scene. The files are slowed 4x with the start and final poses held; the
+// benchmark scores joint distance (cost, rad), not time, so the cards show no makespan timer.
+// initial: time to the first solution; planning: first solution + 1 s (bin picking, 6 arms) or
+// 6 s (shelves, 8 arms) of refinement; roadmaps excluded.
+window.CUARMS_XECBS = [
+  { id: 'xecbs-binpick', title: 'Bin picking · 4 arms', initial: 0.12, planning: 1.26, cost: 27.21, timer: false, duration: 7.9 },
+  { id: 'xecbs-shelves', title: 'Shelves · 8 arms', initial: 4.58, planning: 11.10, cost: 49.04, timer: false, duration: 7.7 },
+  { id: 'xecbs-6', title: 'Circle · 6 arms', initial: 0.08, planning: 1.15, cost: 34.18, timer: false, duration: 8.9 },
+  { id: 'xecbs-8', title: 'Circle · 8 arms', initial: 0.13, planning: 6.28, cost: 42.53, timer: false, duration: 8.133333 },
+];
+
 // BEGIN CUARMS_AGENTS (generated)
 window.CUARMS_AGENTS = [
   {

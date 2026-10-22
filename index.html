@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#f8f9f6">
   <title>cuArms · Multi-Arm Manipulation</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="styles.css?v=20261012c">
-  <script src="content.js?v=20261012c" defer></script>
-  <script src="site.js?v=20261012c" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261022a">
+  <script src="content.js?v=20261022a" defer></script>
+  <script src="site.js?v=20261022a" defer></script>
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -83,9 +83,18 @@
 
     <section class="page-width section-space experiment-section" id="results" aria-labelledby="results-title">
       <h2 id="results-title">Additional Results</h2>
-      <p class="section-description">Multi-Modal Multi-Robot Multi-Goal Path Planning benchmark <a class="citation" href="#reference-3">[3]</a>. Planning time includes refinement. Makespan timers show execution time; speed labels indicate accelerated playback.</p>
-      <div id="assembly-player"></div>
-      <p class="section-reference" id="reference-3"><span>[3]</span> V. N. Hartmann, T. Heinle, Y. Huang, and S. Coros, “<a href="https://arxiv.org/abs/2503.03509" target="_blank" rel="noopener">Sampling-Based Multi-Modal Multi-Robot Multi-Goal Path Planning</a>,” <em>WAFR</em>, 2026.</p>
+      <div class="benchmark-results" id="mrmg">
+        <h3>Long-horizon multi-arm assembly manipulation planning</h3>
+        <p class="section-description">Multi-Modal Multi-Robot Multi-Goal Path Planning benchmark <a class="citation" href="#reference-3">[3]</a>. Planning time includes refinement. Makespan timers show execution time; speed labels indicate accelerated playback.</p>
+        <div id="assembly-player"></div>
+        <p class="section-reference" id="reference-3"><span>[3]</span> V. N. Hartmann, T. Heinle, Y. Huang, and S. Coros, “<a href="https://arxiv.org/abs/2503.03509" target="_blank" rel="noopener">Sampling-Based Multi-Modal Multi-Robot Multi-Goal Path Planning</a>,” <em>WAFR</em>, 2026.</p>
+      </div>
+      <div class="benchmark-results" id="xecbs">
+        <h3>One-shot multi-arm motion planning</h3>
+        <p class="section-description">One query per scene of the xECBS benchmark <a class="citation" href="#reference-4">[4]</a>. Planning time includes 1&ndash;6 s of refinement, not roadmap construction; cost is the total joint-space distance (rad), as in the benchmark. Played at 0.25&times;.</p>
+        <div id="xecbs-player"></div>
+        <p class="section-reference" id="reference-4"><span>[4]</span> Y. Shaoul, I. Mishani, M. Likhachev, and J. Li, “<a href="https://arxiv.org/abs/2404.00143" target="_blank" rel="noopener">Accelerating Search-Based Planning for Multi-Robot Manipulation by Leveraging Online-Generated Experiences</a>,” <em>ICAPS</em>, 2024.</p>
+      </div>
     </section>
     <section class="page-width section-space experiment-section" id="agents" aria-labelledby="agents-title">
       <h2 id="agents-title">Using Coding Agents as the Scheduler</h2>

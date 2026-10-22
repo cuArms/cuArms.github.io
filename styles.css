@@ -91,11 +91,15 @@ figcaption { color:var(--muted); font-size:13px; line-height:1.6; }
 .featured-player .media-grid { display:block; }
 .featured-player .media-card-bar { display:none; }
 .featured-player .media-group-title { font-size:17px; }
-.scaling-results { margin-top:42px; border-top:1px solid var(--line); padding-top:38px; }
-.scaling-results .section-description { margin-bottom:20px; }
-.scaling-results > h3 { font-size:23px; }
-.scaling .media-grid,.assembly .media-grid { gap:25px 22px; }
-.scaling .media-name,.assembly .media-name { font-size:15px; }
+.scaling-results,.benchmark-results { margin-top:42px; border-top:1px solid var(--line); padding-top:38px; }
+.scaling-results .section-description,.benchmark-results .section-description { margin-bottom:20px; }
+.scaling-results > h3,.benchmark-results > h3 { font-size:23px; }
+#results-title + .benchmark-results { margin-top:16px; border-top:0; padding-top:0; }
+.scaling .media-grid,.assembly .media-grid,.benchmark .media-grid { gap:25px 22px; }
+.scaling .media-name,.assembly .media-name,.benchmark .media-name { font-size:15px; }
+/* A row's cards share their bar and video rows, so videos line up however the metrics wrap. */
+.benchmark .media-grid { grid-auto-rows:auto; }
+.benchmark .media-card { display:grid; grid-row:span 2; grid-template-rows:subgrid; row-gap:0; }
 footer { border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:24px; padding-block:27px; }
 footer p,footer > a:last-child { color:var(--muted); font-size:11px; }
 .skip-link { position:fixed; top:-80px; left:20px; padding:12px 20px; background:white; z-index:20; }

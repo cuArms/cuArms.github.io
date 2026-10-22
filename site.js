@@ -62,10 +62,13 @@ function makeCard(clip, title, layout, feature = false) {
   const bar = make('div', 'media-card-bar');
   const name = make(feature ? 'span' : 'h4', 'media-name', feature ? '' : clip.title);
   const metrics = make('div', 'media-metrics');
+  if (clip.initial !== undefined) metrics.append(make('span', 'planning-time', `First solution ${clip.initial.toFixed(2)} s`));
   if (clip.planning !== undefined) metrics.append(make('span', 'planning-time', `Planning ${clip.planning.toFixed(2)} s`));
   if (clip.session !== undefined) metrics.append(make('span', 'planning-time', `Agent session ${Math.round(clip.session)} min`));
-  const timer = make('span', 'media-timer');
-  metrics.append(timer);
+  if (clip.cost !== undefined) metrics.append(make('span', 'planning-time', `Cost ${clip.cost.toFixed(1)} rad`));
+  // Clips without a timeline in seconds (e.g. benchmarks that score distance) omit the timer.
+  const timer = clip.timer === false ? null : make('span', 'media-timer');
+  if (timer) metrics.append(timer);
   const speedTag = clip.speed ? make('span', 'speed-tag', `${clip.speed}× playback`) : null;
   if (speedTag) metrics.append(speedTag);
   bar.append(name, metrics);
@@ -92,6 +95,7 @@ function makeCard(clip, title, layout, feature = false) {
   return {clip, card, shell, video, timer, speedTag};
 }
 function updateMetric({clip, video, timer}) {
+  if (!timer) return;
   const current = Number.isFinite(video.currentTime) ? video.currentTime : 0;
   timer.textContent = `${clip.excerpt ? 'Playback' : clip.execution ? 'Execution' : 'Makespan'} ${timeLabel(Math.min(current, clip.duration))} / ${timeLabel(clip.duration)}${clip.excerpt ? ' excerpt' : ''}`;
 }
@@ -400,6 +404,7 @@ createChoice($('#tabletop-comparisons'), {title: 'Four objects', choose: 'a task
   options: window.CUARMS_TABLETOP});
 createIndependent($('#scaling-player'), {title: 'Six and eight objects', clips: window.CUARMS_SCALING, layout: 'scaling'});
 createIndependent($('#assembly-player'), {title: 'Assembly tasks', clips: window.CUARMS_ASSEMBLIES, layout: 'assembly'});
+createIndependent($('#xecbs-player'), {title: 'Four scenes', clips: window.CUARMS_XECBS, layout: 'benchmark'});
 // A comparison with buttons for its cases; a choice rebuilds the synchronized player.
 function createChoice(mount, group) {
   const block = make('div', 'choice-group');
