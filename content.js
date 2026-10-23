@@ -65,6 +65,18 @@ window.CUARMS_XECBS = [
   { id: 'xecbs-8', title: 'Circle · 8 arms', initial: 0.13, planning: 6.28, cost: 42.53, timer: false, duration: 8.133333 },
 ];
 
+// LEGO assembly on the dual-GP4 cell, cuArms seed 0. Real-time files (a frame per 0.5 s of
+// plan) played fast, so the timer shows execution time. initial, planning: median time to the first
+// and the final plan over seeds 0-4 (the appendix's t0, tf).
+window.CUARMS_LEGO = [
+  { id: 'lego-fish-cuarms', title: 'Fish · 29 bricks', initial: 3.05, planning: 7.4, duration: 397.1, speed: 10 },
+  { id: 'lego-vessel-cuarms', title: 'Vessel · 36 bricks', initial: 2.06, planning: 5.9, duration: 317.1, speed: 10 },
+  { id: 'lego-faucet-cuarms', title: 'Faucet · 14 bricks', initial: 0.85, planning: 2.8, duration: 170.6, speed: 10 },
+  { id: 'lego-cliff-cuarms', title: 'Cliff · 12 bricks', initial: 1.34, planning: 1.9, duration: 156.7, speed: 10 },
+  { id: 'lego-rss-cuarms', title: 'RSS · 47 bricks', initial: 2.95, planning: 8.1, duration: 510.5, speed: 10 },
+  { id: 'lego-guitar-cuarms', title: 'Guitar · 24 bricks', initial: 1.50, planning: 4.4, duration: 243.5, speed: 10 },
+];
+
 // BEGIN CUARMS_AGENTS (generated)
 window.CUARMS_AGENTS = [
   {

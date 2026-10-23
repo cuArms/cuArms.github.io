@@ -34,7 +34,7 @@ function makeTransport(label, duration, initialSpeed = 1) {
   const clock = make('span', 'transport-clock');
   const speed = make('select', 'transport-speed');
   speed.setAttribute('aria-label', `Playback speed for ${label}`);
-  for (const value of [0.5, 1, 1.5, 2, 3]) {
+  for (const value of [...new Set([0.5, 1, 1.5, 2, 3, initialSpeed])].sort((a, b) => a - b)) {
     const option = make('option', '', `${value}×`);
     option.value = String(value);
     speed.append(option);
@@ -405,6 +405,7 @@ createChoice($('#tabletop-comparisons'), {title: 'Four objects', choose: 'a task
 createIndependent($('#scaling-player'), {title: 'Six and eight objects', clips: window.CUARMS_SCALING, layout: 'scaling'});
 createIndependent($('#assembly-player'), {title: 'Assembly tasks', clips: window.CUARMS_ASSEMBLIES, layout: 'assembly'});
 createIndependent($('#xecbs-player'), {title: 'Four scenes', clips: window.CUARMS_XECBS, layout: 'benchmark'});
+createIndependent($('#lego-player'), {title: 'Six structures', clips: window.CUARMS_LEGO, layout: 'benchmark'});
 // A comparison with buttons for its cases; a choice rebuilds the synchronized player.
 function createChoice(mount, group) {
   const block = make('div', 'choice-group');
