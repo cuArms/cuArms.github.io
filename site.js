@@ -6,8 +6,8 @@ const make = (tag, className = '', value = '') => {
   if (value) element.textContent = value;
   return element;
 };
-const videoPath = clip => `videos/web/${clip.id}.mp4?v=20261025b`;
-const posterPath = clip => `assets/posters/${clip.id}.jpg?v=20261025b`;
+const videoPath = clip => `videos/web/${clip.id}.mp4?v=20261025c`;
+const posterPath = clip => `assets/posters/${clip.id}.jpg?v=20261025c`;
 const timeLabel = seconds => `${seconds.toFixed(1)} s`;
 const clockLabel = seconds => {
   const time = Math.max(0, Number.isFinite(seconds) ? seconds : 0);
