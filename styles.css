@@ -29,7 +29,7 @@ nav a:hover { color:var(--ink); }
 .showcase-layout { display:grid; grid-template-columns:minmax(0,1fr) 270px; gap:20px; }
 .featured-demo { min-width:0; }
 .featured-caption { font-size:13px; color:var(--muted); max-width:690px; margin-top:9px; line-height:1.55; }
-.demo-picker { display:flex; flex-direction:column; gap:9px; align-self:start; }
+.demo-picker { display:flex; flex-direction:column; gap:9px; align-self:start; max-height:min(560px, 70vh); overflow-y:auto; padding-right:4px; }
 .demo-choice { display:flex; align-items:center; gap:11px; width:100%; min-height:94px; padding:10px; text-align:left; background:transparent; border:1px solid var(--line); border-radius:6px; color:var(--ink); }
 .demo-choice img { width:96px; aspect-ratio:16/10; object-fit:cover; border-radius:3px; }
 .demo-choice strong { display:block; font-size:13px; font-weight:600; line-height:1.3; }
@@ -37,11 +37,9 @@ nav a:hover { color:var(--ink); }
 .demo-choice:hover { background:var(--tint); }
 .abstract-section { border-block:1px solid var(--line); }
 .abstract-section h2 { margin-bottom:24px; }
-.method-figure { margin-top:32px; }
-.method-figure img { width:100%; background:white; border:1px solid var(--line); border-radius:7px; padding:18px; }
 figcaption { color:var(--muted); font-size:13px; line-height:1.6; }
-.method-figure figcaption { max-width:960px; margin-top:15px; }
-.method-figure figcaption strong { color:var(--ink); }
+.method-video { margin-top:24px; max-width:960px; }
+.method-overview { max-width:960px; margin-top:12px; font-size:14px; color:var(--muted); line-height:1.6; }
 .contributions-title { margin-top:30px; }
 .contributions { padding-left:20px; margin-bottom:0; }
 .contributions li + li { margin-top:12px; }
@@ -130,7 +128,6 @@ footer p,footer > a:last-child { color:var(--muted); font-size:11px; }
   .demo-choice img { width:53px; aspect-ratio:1; }
   .demo-choice strong { font-size:11px; }
   .section-space { padding-block:52px; }
-  .method-figure img { padding:6px; }
   .media-grid { grid-template-columns:1fr; gap:22px; }
   .media-group { padding-block:24px 29px; }
   .media-group-header { gap:12px; }

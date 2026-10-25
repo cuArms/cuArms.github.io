@@ -1,14 +1,17 @@
 // Per-example timings follow the current supplementary deck.
 // Makespan is execution time. RL excerpts have playback timers, not makespans.
 window.CUARMS_FEATURED = [
+  { id: 'highlight-demos', title: 'Highlights', duration: 72.5, caption: 'cuArms on real robots, multi-arm welding, tabletop task and motion planning, coding agents as the scheduler, and long-horizon assembly benchmarks.' },
   { id: 'handover', title: 'Bimanual Handover', duration: 20, aspect: '1280 / 790', caption: 'Two arms execute a pick, handover, and place sequence to reorient an object.' },
   { id: 'carry', title: 'Bimanual Carry', duration: 24, aspect: '1280 / 790', caption: 'Two arms grasp and carry a shared object into place.' },
   { id: 'kinova-stack', title: 'Bimanual Block Stacking', duration: 42.5, speed: 2, aspect: '16 / 9', caption: 'Two Kinova arms coordinate pick-and-place motions to stack blocks into a single tower.' },
   { id: 'kinova', title: 'Bimanual TableTop Packing', duration: 71.2, speed: 2, caption: 'Two Kinova arms coordinate pick-and-place motions to pack blocks into a shared region.' },
-  { id: 'reaching', title: 'Multi-Arm Welding', duration: 9.6, caption: 'Eight arms coordinate motions to reach 40 weld targets in a shared workcell.' },
-  { id: 'pack', title: 'Tabletop Manipulation', duration: 8.925, caption: 'Two arms coordinate motions and manipulation skills to pack objects into a shared region.' },
   { id: 'supplementary', title: 'Full Supplementary Video', duration: 176.233333, caption: 'The complete anonymous supplementary video, including real-robot experiments, baseline comparisons, object scaling, and additional results.' },
-  { id: 'lego', title: 'LEGO Assembly', duration: 78.1, caption: 'Two arms coordinate a longer LEGO assembly sequence.' },
+];
+
+// The Method section's walkthrough, under Fig. 2.
+window.CUARMS_METHOD = [
+  { id: 'highlight-method', title: 'How cuArms Works', duration: 53.1, caption: 'From a task and its schedule to a synchronized multi-arm plan: per-arm roadmaps, conflict-driven search with GPU conflict checks, and batched shortcuts, on a 2D example.' },
 ];
 
 window.CUARMS_WELDING = [
@@ -65,16 +68,17 @@ window.CUARMS_XECBS = [
   { id: 'xecbs-8', title: 'Circle · 8 arms', initial: 0.13, planning: 6.28, cost: 42.53, timer: false, duration: 8.133333 },
 ];
 
-// LEGO assembly on the dual-GP4 cell, cuArms seed 0. Real-time files (a frame per 0.5 s of
-// plan) played fast, so the timer shows execution time. initial, planning: median time to the first
-// and the final plan over seeds 0-4 (the appendix's t0, tf).
+// LEGO assembly on the dual-GP4 cell, cuArms seed 0, each arm at its own pace (TPG execution).
+// Real-time files (a frame per 0.5 s of plan) played fast, so the timer shows execution time.
+// initial, planning: median time to the first and the final plan over seeds 0-4, with 5 s of
+// refinement (20 s on Big Chair).
 window.CUARMS_LEGO = [
-  { id: 'lego-fish-cuarms', title: 'Fish · 29 bricks', initial: 3.05, planning: 7.4, duration: 397.1, speed: 10 },
-  { id: 'lego-vessel-cuarms', title: 'Vessel · 36 bricks', initial: 2.06, planning: 5.9, duration: 317.1, speed: 10 },
-  { id: 'lego-faucet-cuarms', title: 'Faucet · 14 bricks', initial: 0.85, planning: 2.8, duration: 170.6, speed: 10 },
-  { id: 'lego-cliff-cuarms', title: 'Cliff · 12 bricks', initial: 1.34, planning: 1.9, duration: 156.7, speed: 10 },
-  { id: 'lego-rss-cuarms', title: 'RSS · 47 bricks', initial: 2.95, planning: 8.1, duration: 510.5, speed: 10 },
-  { id: 'lego-guitar-cuarms', title: 'Guitar · 24 bricks', initial: 1.50, planning: 4.4, duration: 243.5, speed: 10 },
+  { id: 'lego-fish-cuarms', title: 'Fish · 29 bricks', initial: 3.30, planning: 8.6, duration: 350.5, speed: 10 },
+  { id: 'lego-vessel-cuarms', title: 'Vessel · 36 bricks', initial: 2.18, planning: 7.3, duration: 267.6, speed: 10 },
+  { id: 'lego-faucet-cuarms', title: 'Faucet · 14 bricks', initial: 0.86, planning: 4.0, duration: 159.7, speed: 10 },
+  { id: 'lego-cliff-cuarms', title: 'Cliff · 12 bricks', initial: 1.37, planning: 2.5, duration: 142.2, speed: 10 },
+  { id: 'lego-rss-cuarms', title: 'RSS · 47 bricks', initial: 3.15, planning: 8.5, duration: 448.6, speed: 10 },
+  { id: 'lego-big-chair-cuarms', title: 'Big Chair · 258 bricks', initial: 13.64, planning: 36.5, duration: 1644.4, speed: 16 },
 ];
 
 // BEGIN CUARMS_AGENTS (generated)

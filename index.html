@@ -33,11 +33,11 @@
       <div class="showcase-layout">
         <div class="featured-demo">
           <div id="featured-player"></div>
-          <p id="featured-description" class="featured-caption">Two arms execute a pick, handover, and place sequence to reorient an object.</p>
+          <p id="featured-description" class="featured-caption">cuArms on real robots, multi-arm welding, tabletop task and motion planning, coding agents as the scheduler, and long-horizon assembly benchmarks.</p>
         </div>
         <div class="demo-picker" id="demo-picker" role="group" aria-label="Choose a featured demonstration"></div>
       </div>
-      <noscript><video controls muted playsinline preload="none" src="videos/web/handover.mp4" poster="assets/posters/handover.jpg" aria-label="Bimanual handover"></video></noscript>
+      <noscript><video controls muted playsinline preload="none" src="videos/web/highlight-demos.mp4" poster="assets/posters/highlight-demos.jpg" aria-label="Highlights"></video></noscript>
     </section>
     <section class="abstract-section section-space" id="abstract" aria-labelledby="abstract-title">
       <div class="reading-width">
@@ -48,10 +48,8 @@
 
     <section class="page-width section-space" id="method" aria-labelledby="method-title">
       <h2 id="method-title">Method</h2>
-      <figure class="method-figure">
-        <a href="assets/figures/method.png" target="_blank" rel="noopener" aria-label="Open the method figure at full resolution"><img src="assets/figures/method.png" width="2600" height="812" loading="lazy" alt="Figure 2: a task scheduler feeds multi-modal roadmap construction, GPU-batched joint coordination, and shortcut refinement. The resulting plan feeds back to alternative schedules."></a>
-        <figcaption><strong>Figure 2. System and cuArms overview.</strong> A human or agent defines the task: the robots and their kinematics, the objects, goals, and constraints. The domain also supplies samplers that can generate feasible manipulation choices. A task scheduler, such as ScheduleStream, proposes a candidate schedule. This includes task assignment and ordering, along with satisfying samples such as placements, grasps, and inverse kinematic solutions. cuArms builds a per-robot multi-modal roadmap, searches for conflict-free robot movements and skills with GPU-batched conflict tables, and refines the solution trajectory with shortcutting. cuArms can iteratively replan with different schedule skeletons to improve upon infeasible or poor skeletons.</figcaption>
-      </figure>
+      <div class="method-video" id="method-player"></div>
+      <p class="method-overview">A human or agent defines the task: the robots and their kinematics, the objects, goals, and constraints. The domain also supplies samplers that can generate feasible manipulation choices. A task scheduler, such as ScheduleStream, proposes a candidate schedule. This includes task assignment and ordering, along with satisfying samples such as placements, grasps, and inverse kinematic solutions. cuArms builds a per-robot multi-modal roadmap, searches for conflict-free robot movements and skills with GPU-batched conflict tables, and refines the solution trajectory with shortcutting. cuArms can iteratively replan with different schedule skeletons to improve upon infeasible or poor skeletons.</p>
       <div class="method-contributions">
         <h3 class="contributions-title">Our contributions are:</h3>
         <ul class="contributions">
@@ -83,23 +81,23 @@
 
     <section class="page-width section-space experiment-section" id="results" aria-labelledby="results-title">
       <h2 id="results-title">Additional Results</h2>
+      <div class="benchmark-results" id="lego">
+        <h3>Long-horizon LEGO assembly</h3>
+        <p class="section-description">Six LEGO assembly tasks from APEX-MR <a class="citation" href="#reference-3">[3]</a> on two GP4 arms. Given APEX-MR&rsquo;s task assignment and action ordering, cuArms plans all motions and manipulation skills. Played 10&times; faster than real time (Big Chair 16&times;).</p>
+        <div id="lego-player"></div>
+        <p class="section-reference" id="reference-3"><span>[3]</span> P. Huang, R. Liu, S. Aggarwal, C. Liu, and J. Li, “<a href="https://arxiv.org/abs/2503.15836" target="_blank" rel="noopener">APEX-MR: Multi-Robot Asynchronous Planning and Execution for Cooperative Assembly</a>,” <em>RSS</em>, 2025.</p>
+      </div>
       <div class="benchmark-results" id="mrmg">
         <h3>Long-horizon multi-arm assembly manipulation planning</h3>
-        <p class="section-description">Multi-Modal Multi-Robot Multi-Goal Path Planning benchmark <a class="citation" href="#reference-3">[3]</a>. Planning time includes refinement. Makespan timers show execution time; speed labels indicate accelerated playback.</p>
+        <p class="section-description">Multi-Modal Multi-Robot Multi-Goal Path Planning benchmark <a class="citation" href="#reference-4">[4]</a>. Planning time includes refinement. Makespan timers show execution time; speed labels indicate accelerated playback.</p>
         <div id="assembly-player"></div>
-        <p class="section-reference" id="reference-3"><span>[3]</span> V. N. Hartmann, T. Heinle, Y. Huang, and S. Coros, “<a href="https://arxiv.org/abs/2503.03509" target="_blank" rel="noopener">Sampling-Based Multi-Modal Multi-Robot Multi-Goal Path Planning</a>,” <em>WAFR</em>, 2026.</p>
+        <p class="section-reference" id="reference-4"><span>[4]</span> V. N. Hartmann, T. Heinle, Y. Huang, and S. Coros, “<a href="https://arxiv.org/abs/2503.03509" target="_blank" rel="noopener">Sampling-Based Multi-Modal Multi-Robot Multi-Goal Path Planning</a>,” <em>WAFR</em>, 2026.</p>
       </div>
       <div class="benchmark-results" id="xecbs">
         <h3>One-shot multi-arm motion planning</h3>
-        <p class="section-description">One query per scene of the xECBS benchmark <a class="citation" href="#reference-4">[4]</a>. Planning time includes 1&ndash;6 s of refinement, not roadmap construction; cost is the total joint-space distance (rad), as in the benchmark. Played at 0.25&times;.</p>
+        <p class="section-description">One query per scene of the xECBS benchmark <a class="citation" href="#reference-5">[5]</a>. Planning time includes 1&ndash;6 s of refinement, not roadmap construction; cost is the total joint-space distance (rad), as in the benchmark. Played at 0.25&times;.</p>
         <div id="xecbs-player"></div>
-        <p class="section-reference" id="reference-4"><span>[4]</span> Y. Shaoul, I. Mishani, M. Likhachev, and J. Li, “<a href="https://arxiv.org/abs/2404.00143" target="_blank" rel="noopener">Accelerating Search-Based Planning for Multi-Robot Manipulation by Leveraging Online-Generated Experiences</a>,” <em>ICAPS</em>, 2024.</p>
-      </div>
-      <div class="benchmark-results" id="lego">
-        <h3>Long-horizon LEGO assembly</h3>
-        <p class="section-description">Six LEGO assembly tasks from APEX-MR <a class="citation" href="#reference-5">[5]</a> on two GP4 arms. Given APEX-MR&rsquo;s task assignment and action ordering, cuArms plans all motions and manipulation skills. Played 10&times; faster than real time.</p>
-        <div id="lego-player"></div>
-        <p class="section-reference" id="reference-5"><span>[5]</span> P. Huang, R. Liu, S. Aggarwal, C. Liu, and J. Li, “<a href="https://arxiv.org/abs/2503.15836" target="_blank" rel="noopener">APEX-MR: Multi-Robot Asynchronous Planning and Execution for Cooperative Assembly</a>,” <em>RSS</em>, 2025.</p>
+        <p class="section-reference" id="reference-5"><span>[5]</span> Y. Shaoul, I. Mishani, M. Likhachev, and J. Li, “<a href="https://arxiv.org/abs/2404.00143" target="_blank" rel="noopener">Accelerating Search-Based Planning for Multi-Robot Manipulation by Leveraging Online-Generated Experiences</a>,” <em>ICAPS</em>, 2024.</p>
       </div>
     </section>
     <section class="page-width section-space experiment-section" id="agents" aria-labelledby="agents-title">

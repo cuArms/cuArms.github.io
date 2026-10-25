@@ -6,8 +6,8 @@ const make = (tag, className = '', value = '') => {
   if (value) element.textContent = value;
   return element;
 };
-const videoPath = clip => `videos/web/${clip.id}.mp4?v=20260923`;
-const posterPath = clip => `assets/posters/${clip.id}.jpg?v=20260923`;
+const videoPath = clip => `videos/web/${clip.id}.mp4?v=20261025`;
+const posterPath = clip => `assets/posters/${clip.id}.jpg?v=20261025`;
 const timeLabel = seconds => `${seconds.toFixed(1)} s`;
 const clockLabel = seconds => {
   const time = Math.max(0, Number.isFinite(seconds) ? seconds : 0);
@@ -405,6 +405,7 @@ createChoice($('#tabletop-comparisons'), {title: 'Four objects', choose: 'a task
 createIndependent($('#scaling-player'), {title: 'Six and eight objects', clips: window.CUARMS_SCALING, layout: 'scaling'});
 createIndependent($('#assembly-player'), {title: 'Assembly tasks', clips: window.CUARMS_ASSEMBLIES, layout: 'assembly'});
 createIndependent($('#xecbs-player'), {title: 'Four scenes', clips: window.CUARMS_XECBS, layout: 'benchmark'});
+createIndependent($('#method-player'), {title: 'How cuArms works', clips: window.CUARMS_METHOD, layout: 'feature', feature: true});
 createIndependent($('#lego-player'), {title: 'Six structures', clips: window.CUARMS_LEGO, layout: 'benchmark'});
 // A comparison with buttons for its cases; a choice rebuilds the synchronized player.
 function createChoice(mount, group) {
