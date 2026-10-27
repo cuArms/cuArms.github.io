@@ -25,6 +25,9 @@ nav a:hover { color:var(--ink); }
 .hero { text-align:center; padding-top:44px; padding-bottom:32px; }
 .hero h1 { max-width:1020px; margin:auto; font-size:clamp(25px,3.2vw,37px); font-weight:550; letter-spacing:-1px; line-height:1.25; text-wrap:balance; }
 .authors { margin-top:20px; font-size:15px; color:var(--muted); }
+.paper-links { margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+.paper-link { padding:6px 16px; border:1px solid var(--accent); border-radius:999px; font-size:14px; font-weight:600; text-decoration:none; }
+.paper-link:hover { background:var(--tint); }
 .showcase { padding-bottom:58px; }
 /* The featured video takes the page column's full width, kept short enough to fit whole below the sticky
    header; the picker is a centered row of thumbnails under it that scrolls sideways when it does not fit. */
